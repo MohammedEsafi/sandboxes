@@ -1,6 +1,12 @@
 add_newline = false
 
-format = '$directory$git_branch$git_commit$git_status$git_state$status$character'
+format = '$custom.container$directory$git_branch$git_commit$git_status$git_state$status$character'
+
+[custom.container]
+command = 'printf "(sbx) "'
+when = 'true'
+style = 'blue'
+format = '[$output]($style)'
 
 [directory]
 style = 'red'

@@ -1,0 +1,10 @@
+FROM docker/sandbox-templates:opencode-docker
+
+USER root
+
+COPY setup.sh /tmp/setup.sh
+COPY config /tmp/.config
+
+RUN bash /tmp/setup.sh
+
+USER agent

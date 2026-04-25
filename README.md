@@ -22,10 +22,12 @@ The images add:
 Run the matching agent with `sbx`:
 
 ```bash
-sbx run --template MohammedEsafi/codex-sandbox:latest codex
-sbx run --template MohammedEsafi/claude-sandbox:latest claude
-sbx run --template MohammedEsafi/opencode-sandbox:latest opencode
+sbx run --template mohammedesafi/codex-sandbox:latest codex
+sbx run --template mohammedesafi/claude-sandbox:latest claude
+sbx run --template mohammedesafi/opencode-sandbox:latest opencode
 ```
+
+These images are published for `linux/arm64`, which matches Apple Silicon Macs.
 
 ## Publish
 

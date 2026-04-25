@@ -7,7 +7,6 @@ This folder contains Docker Sandbox templates for multiple agents with a shared 
 - `Containerfile.codex`: Codex sandbox image
 - `Containerfile.claude`: Claude sandbox image
 - `Containerfile.opencode`: OpenCode sandbox image
-- `setup.sh`: shared package and shell setup
 - `config/`: shared fish and Starship config
 
 ## Build
@@ -39,3 +38,16 @@ The shared setup installs:
 - `libatomic1`
 
 `libatomic1` is included so local `workerd` can run in environments that do not provide it by default.
+
+## Publish
+
+Images are published by `.github/workflows/publish-images.yml` when changes land on `main` for:
+
+- `Containerfile.*`
+- `config/**`
+- `.github/workflows/publish-images.yml`
+
+Configure these repository secrets in GitHub Actions before pushing:
+
+- `DOCKERHUB_USERNAME`
+- `DOCKERHUB_TOKEN`

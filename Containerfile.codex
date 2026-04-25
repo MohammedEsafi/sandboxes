@@ -1,10 +1,21 @@
+# syntax=docker/dockerfile:1
+
 FROM docker/sandbox-templates:codex-docker
 
 USER root
 
-COPY setup.sh /tmp/setup.sh
-COPY config /tmp/.config
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt/lists,sharing=locked \
+    apt-get -o Acquire::Check-Date=false update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends fish starship libatomic1 \
+    && rm -rf /var/lib/apt/lists/* \
+    && mkdir -p /home/agent/.config/fish \
+    && chown -R agent:agent /home/agent/.config
 
-RUN bash /tmp/setup.sh
+COPY --chown=agent:agent config/fish/config.fish /home/agent/.config/fish/config.fish
+COPY --chown=agent:agent config/starship/starship.toml /home/agent/.config/starship.toml
+
+RUN FISH_PATH="$(command -v fish)" \
+    && chsh -s "$FISH_PATH" agent
 
 USER agent
